@@ -10,8 +10,10 @@ import os
 
 
 def update():
-	"""Run yum update with exclusions"""
-	sudo("yum -y update --disablerepo='*artifactory' --exclude=puppet* --exclude=sensu --exclude=mongo* --exclude=redis* --exclude=rabbitmq*", pty=True)
+	if run("yum check-update").return_code != 0:
+		if confirm("execute yum update?", default=False) == True:
+			"""Run yum update with exclusions"""
+			sudo("yum -y update --disablerepo='*artifactory' --exclude=puppet* --exclude=sensu --exclude=mongo* --exclude=redis* --exclude=rabbitmq*", pty=True)
 
 def slowReboot():
 	"""Do a careful reboot with checks."""

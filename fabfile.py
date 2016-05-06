@@ -18,7 +18,7 @@ def slowReboot():
 	print("Get the kernel version before reboot.")
 	preresult = run("uname -r")
 	preresult.failed
-	# print($result)
+	# print "Let's talk about %s." % preresult
 	# reboot(wait=120)
 	print("Get the kernel version after reboot.")
 	run("uname -r")

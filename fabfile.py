@@ -9,6 +9,7 @@ import re
 import os
 
 
+@parallel
 def update():
 	if run("yum check-update").return_code != 0:
 		env.parallel = True

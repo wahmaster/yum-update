@@ -15,8 +15,12 @@ def update():
 
 def slowReboot():
 	"""Do a careful reboot with checks."""
-	run("uname -r")
-	reboot(wait=120)
+	print("Get the kernel version before reboot.")
+	preresult = run("uname -r")
+	preresult.failed
+	print($result)
+	# reboot(wait=120)
+	print("Get the kernel version after reboot.")
 	run("uname -r")
 
 

@@ -12,8 +12,8 @@ import os
 @parallel
 def update():
 	if run("yum check-update").return_code != 0:
-		env.parallel = True
 		"""Run yum update with exclusions"""
+		env.parallel = True
 		sudo("yum -y update --disablerepo='*artifactory' --exclude=puppet* --exclude=sensu --exclude=mongo* --exclude=redis* --exclude=rabbitmq*", pty=True)
 
 @parallel
@@ -29,3 +29,10 @@ def slowReboot():
 	print "<br/><br/>"
 
 
+@parallel
+def updatetest():
+        if run("yum check-update").return_code != 0:
+                """Run yum update with exclusions"""
+                env.parallel = True
+		print ("These are the excludes: %s") % excludes				
+                # sudo("yum update --disablerepo='*artifactory' %s", pty=True) % excludes

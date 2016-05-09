@@ -35,4 +35,4 @@ def updatetest():
                 """Run yum update with exclusions"""
                 env.parallel = True
 		print ("These are the excludes: %s") % (env.excludes)				
-                # sudo("yum update --disablerepo='*artifactory' %s", pty=True) % excludes
+                sudo("yum update --disablerepo='*artifactory' %s", pty=True) % (env.excludes)

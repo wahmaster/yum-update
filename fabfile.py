@@ -14,7 +14,8 @@ def update():
 	if run("yum check-update").return_code != 0:
 		"""Run yum update with exclusions"""
 		env.parallel = True
-		sudo("yum -y update --disablerepo='*artifactory' --exclude=puppet* --exclude=sensu --exclude=mongo* --exclude=redis* --exclude=rabbitmq*", pty=True)
+		print ("These are the excludes: %s") % (env.excludes)				
+                sudo("yum -y update --disablerepo='*artifactory' %s" % (env.excludes), pty=True) 
 
 @parallel
 def slowReboot():
@@ -30,9 +31,8 @@ def slowReboot():
 
 
 @parallel
-def updatetest():
-        if run("yum check-update").return_code != 0:
-                """Run yum update with exclusions"""
-                env.parallel = True
-		print ("These are the excludes: %s") % (env.excludes)				
-                sudo("yum -y update --disablerepo='*artifactory' %s" % (env.excludes), pty=True) 
+def kernelReport():
+	"""Report all running kernel versions"""
+	env.parallel = True
+	result = run("uname -r")
+	print "<font color=red>Kernel version:</font><font color=green> %s</font>" % result

@@ -36,3 +36,16 @@ def kernelReport():
 	env.parallel = True
 	result = run("uname -r")
 	print "<font color=red>Kernel version:</font><font color=green> %s</font>" % result
+
+@parallel
+@task
+def get_stats():
+    """get stats from server"""
+    with cd("/tmp"):
+        run("lsb_release -d")
+        run("cat /proc/cpuinfo |grep processor|wc -l")
+        run("free -m")
+        run("egrep --color 'Mem|Cache|Swap' /proc/meminfo")
+        run("df -TH")
+        run("ldd --version|grep ldd")
+        run("perl -v |grep 'This is perl'")

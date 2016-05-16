@@ -38,7 +38,6 @@ def kernelReport():
 	print "<font color=red>Kernel version:</font><font color=green> %s</font>" % result
 
 @parallel
-@task
 def get_stats():
     """get stats from server"""
     with cd("/tmp"):

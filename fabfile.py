@@ -41,10 +41,18 @@ def kernelReport():
 def get_stats():
     """get stats from server"""
     with cd("/tmp"):
-        run("lsb_release -d")
-        run("cat /proc/cpuinfo |grep processor|wc -l")
-        run("free -m")
-        run("egrep --color 'Mem|Cache|Swap' /proc/meminfo")
-        run("df -TH")
-        run("ldd --version|grep ldd")
-        run("perl -v |grep 'This is perl'")
+	kernver = run("uname -r")
+        cpus = run("cat /proc/cpuinfo |grep processor|wc -l")
+        freemem = run("free -m")
+        meminfo = run("egrep --color 'Mem|Cache|Swap' /proc/meminfo")
+        dfinfo = run("df -TH")
+        lddinfo = run("ldd --version|grep ldd")
+        perlver = run("perl -v |grep 'This is perl'")
+	print "<font color=red>Kernel version:</font><font color=green> %s</font>" % kernver
+	print "<font color=red>CPUs:</font><font color=green> %s</font>" % cpus
+	print "<font color=red>Free Memory:</font><font color=green> %s</font>" % freemem
+	print "<font color=red>Memory Info:</font><font color=green> %s</font>" % meminfo
+	print "<font color=red>df info:</font><font color=green> %s</font>" % dfinfo
+	print "<font color=red>ldd info:</font><font color=green> %s</font>" % lddinfo
+	print "<font color=red>Perl version:</font><font color=green> %s</font>" % perlver
+

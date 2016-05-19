@@ -29,6 +29,7 @@ def excludehosts(func):
 
 @task
 @parallel
+@excludehosts
 def update():
 	if run("yum check-update").return_code != 0:
 		"""Run yum update with exclusions"""
@@ -38,6 +39,7 @@ def update():
 
 @task
 @parallel
+@excludehosts
 def slowReboot():
 	"""Do a careful reboot with checks."""
 	preresult = run("uname -r")
@@ -62,6 +64,7 @@ def kernelReport():
 
 @task
 @parallel
+@excludehosts
 def get_stats():
     """get stats from server"""
     with cd("/tmp"):

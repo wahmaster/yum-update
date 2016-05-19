@@ -1,10 +1,12 @@
 #!/usr/bin/env python2.7
 
+from __future__ import with_statement
 from fabric.api import *
 from fabric.contrib import files
 from fabric import tasks
 from fabric.network import disconnect_all
 from fabric.contrib.console import confirm
+from functools import wraps
 import re
 import os
 
@@ -48,6 +50,7 @@ def slowReboot():
 
 @task
 @parallel
+@excludehosts
 def kernelReport():
 	"""Report all running kernel versions"""
 	with hide('everything'):

@@ -18,7 +18,7 @@ def excludehosts(func):
         if exhosts:
             print(green("Verifying host %s") % (env.host))
             if any(env.host in s for s in exhosts):
-                print(green("Excluding host %s" % (env.host)))
+                print("<font color=red>Excluding host %s</font>" % (env.host))
                 return
         return func(*args, **kwargs)
     # This is necessary so that custom decorator is interpreted as fabric decorator

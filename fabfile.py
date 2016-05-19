@@ -36,7 +36,7 @@ def kernelReport():
 	with hide('everything'):
 		env.parallel = True
 		result = run("uname -r")
-		print "<font color=red>Kernel version:</font><font color=green> %s</font>" % result
+		print "<font color=red>Kernel version:</font><font color=green> %s on %s</font>" % (result, env.host)
 
 @parallel
 def get_stats():

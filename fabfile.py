@@ -38,7 +38,6 @@ def update():
                 sudo("yum -y update --disablerepo='*artifactory' %s" % (env.excludes), pty=True) 
 
 @task
-@parallel
 @excludehosts
 def slowReboot():
 	"""Do a careful reboot with checks."""

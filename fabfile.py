@@ -42,14 +42,13 @@ def update():
 @excludehosts
 def slowReboot():
 	"""Do a careful reboot with checks."""
-	preresult = run("uname -r")
-	preresult.failed
-	reboot(wait=120)
-	postresult = run("uname -r")
-	print "<br/><br/>"
-	print "<font color=red>Kernel version before reboot:</font><font color=green> %s</font>" % preresult
-	print "<font color=red>Kernel version after reboot: <font color=green> %s</font>" % postresult
-	print "<br/><br/>"
+	with hide('everything'):
+		preresult = run("uname -r")
+		preresult.failed
+		reboot(wait=120)
+		postresult = run("uname -r")
+		print "<font color=red>Kernel version before reboot:</font><font color=green> %s</font>" % preresult
+		print "<font color=red>Kernel version after reboot: <font color=green> %s</font>" % postresult
 
 
 @task

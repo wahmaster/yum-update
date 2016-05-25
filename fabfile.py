@@ -98,7 +98,7 @@ def kernelReport():
 @parallel
 @excludehosts
 def get_stats():
-    """get stats from server"""
+    """get kernel, #cpus and memory info from server"""
     with hide('everything'):
         with cd("/tmp"):
             kernelver = run("uname -r")

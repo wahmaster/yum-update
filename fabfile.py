@@ -101,7 +101,7 @@ def kernelReport():
 def get_stats():
     """get stats from server"""
     with cd("/tmp"):
-	    run("uname -r")
+        run("uname -r")
         run("cat /proc/cpuinfo |grep processor|wc -l")
         run("free -m")
         run("egrep --color 'Mem|Cache|Swap' /proc/meminfo")

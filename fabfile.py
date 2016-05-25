@@ -110,4 +110,6 @@ def get_stats():
             perlinfo = run("perl -v |grep 'This is perl'")
             print "%s is running kernel: %s" % (env.host, kernelver)
             print "%s has %s CPU cores." % (env.host, cpuinfo)
+            print "%s has %s free memory." % (env.host, freemem)
+            print "%s meminfo:\n %s free memory." % (env.host, meminfo)
 

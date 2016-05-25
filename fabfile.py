@@ -55,13 +55,14 @@ def slowReboot():
 @excludehosts
 def fastReboot():
 	"""Do a fast reboot with checks."""
-	print "<font color=red>Rebooting %s now!</font>" % env.host
-	preresult = run("uname -r")
-	preresult.failed
-	print "<font color=red>%s kernel version before reboot:</font><font color=green> %s</font>" % (env.host, preresult)
-	""" reboot(wait=120) """
-	postresult = run("uname -r")
-	print "<font color=red>%s kernel version after reboot: <font color=green> %s</font>" % (env.host, preresult)
+	with hide('everything'):
+	    print "<font color=red>Rebooting %s now!</font>" % env.host
+	    preresult = run("uname -r")
+	    preresult.failed
+	    print "<font color=red>%s kernel version before reboot:</font><font color=green> %s</font>" % (env.host, preresult)
+	    """ reboot(wait=120) """
+	    postresult = run("uname -r")
+	    print "<font color=red>%s kernel version after reboot: <font color=green> %s</font>" % (env.host, preresult)
 
 @task
 @parallel

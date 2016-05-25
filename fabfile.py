@@ -103,7 +103,7 @@ def get_stats():
         run("uname -r")
         run("cat /proc/cpuinfo |grep processor|wc -l")
         run("free -m")
-        run("egrep --color 'Mem|Cache|Swap' /proc/meminfo")
+        run("egrep --color 'MemTotal|MemFree|MemAvailable|SwapCached|SwapTotal|SwapFree' /proc/meminfo")
         run("df -TH")
         run("ldd --version|grep ldd")
         run("perl -v |grep 'This is perl'")

@@ -73,7 +73,8 @@ def cleanOldKernels():
         checkinstalled = run("rpm -q yum-utils")
         print "check results: %s" % checkinstalled
         if checkinstalled == 'package yum-utils is not installed':
-            print "Yum utils as not installed"
+            print "Yum utils as not installed, installing..."
+            sudo("yum install -y yum-utils")
         kernels = run("rpm -q kernel")
         numkern = len(kernels.split('\n'))
         print "<font color=green>%s: Number of installed kernels: </font><font color=red>%s</font>" % (env.host, numkern)

@@ -101,11 +101,13 @@ def get_stats():
     """get stats from server"""
     with hide('everything'):
         with cd("/tmp"):
-            print(run("uname -r"))
-            run("cat /proc/cpuinfo |grep processor|wc -l")
-            run("free -m")
-            run("egrep 'MemTotal|MemFree|MemAvailable|SwapCached|SwapTotal|SwapFree' /proc/meminfo")
-            run("df -TH")
-            run("ldd --version|grep ldd")
-            run("perl -v |grep 'This is perl'")
+            kernelver = run("uname -r")
+            cpuinfo = run("cat /proc/cpuinfo |grep processor|wc -l")
+            freemem = run("free -m")
+            meminfo = run("egrep 'MemTotal|MemFree|MemAvailable|SwapCached|SwapTotal|SwapFree' /proc/meminfo")
+            dfusage = run("df -TH")
+            lddinfo = run("ldd --version|grep ldd")
+            perlinfo = run("perl -v |grep 'This is perl'")
+            print "%s is running kernel: %s" % (env.host, kernelver)
+            print "%s has %s CPU cores." % (env.host, cpuinfo)
 

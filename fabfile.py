@@ -81,7 +81,7 @@ def cleanOldKernels():
             """ sudo("package-cleanup -y --oldkernels --count=2") """
             afterkernels = run("rpm -q kernel")
             afternumkern = len(afterkernels.split('\n'))
-        print "<font color=green>%s now has <font color=red> %s </font><font color=green>installed kernels</font>" % (env.host, afternumkern)
+            print "<font color=green>%s now has <font color=red> %s </font><font color=green>installed kernels</font>" % (env.host, afternumkern)
 
 
 

@@ -103,16 +103,8 @@ def get_stats():
         with cd("/tmp"):
             kernelver = run("uname -r")
             cpuinfo = run("cat /proc/cpuinfo |grep processor|wc -l")
-            freemem = run("free -m")
             meminfo = run("egrep 'MemTotal|MemFree|MemAvailable|SwapCached|SwapTotal|SwapFree' /proc/meminfo")
-            dfusage = run("df -TH")
-            lddinfo = run("ldd --version|grep ldd")
-            perlinfo = run("perl -v |grep 'This is perl'")
             print "%s is running kernel: %s" % (env.host, kernelver)
             print "%s has %s CPU cores." % (env.host, cpuinfo)
-            print "%s has %s free memory." % (env.host, freemem)
-            print "%s meminfo:\n %s " % (env.host, meminfo)
-            print "%s partition info:\n %s " % (env.host, dfusage)
-            print "%s ldd info: %s " % (env.host, lddinfo)
-            print "%s Perl version: %s \n\n" % (env.host, perlinfo)
+            print "%s meminfo:\n %s \n\n" % (env.host, meminfo)
 

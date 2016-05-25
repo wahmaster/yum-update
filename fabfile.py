@@ -99,12 +99,13 @@ def kernelReport():
 @excludehosts
 def get_stats():
     """get stats from server"""
-    with cd("/tmp"):
-        run("uname -r")
-        run("cat /proc/cpuinfo |grep processor|wc -l")
-        run("free -m")
-        run("egrep --color 'MemTotal|MemFree|MemAvailable|SwapCached|SwapTotal|SwapFree' /proc/meminfo")
-        run("df -TH")
-        run("ldd --version|grep ldd")
-        run("perl -v |grep 'This is perl'")
+    with hide('everything'):
+        with cd("/tmp"):
+            print(run("uname -r"))
+            run("cat /proc/cpuinfo |grep processor|wc -l")
+            run("free -m")
+            run("egrep 'MemTotal|MemFree|MemAvailable|SwapCached|SwapTotal|SwapFree' /proc/meminfo")
+            run("df -TH")
+            run("ldd --version|grep ldd")
+            run("perl -v |grep 'This is perl'")
 

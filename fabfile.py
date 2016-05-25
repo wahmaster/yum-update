@@ -67,6 +67,21 @@ def fastReboot():
 @task
 @parallel
 @excludehosts
+def cleanOldKernels():
+    """Get rid of all kernels except for the last two"""
+    with hide('everything'):
+        """ sudo(package-cleanup -y --oldkernels --count=2)"""
+        kernels = run("rpm -q kernel")
+        numkern = len(kernels.split('\n'))
+        print "Installed Kernels %s" % kernels
+        print "Number of kernels %s" % numkern
+
+
+
+
+@task
+@parallel
+@excludehosts
 def kernelReport():
 	"""Report all running kernel versions"""
 	with hide('everything'):

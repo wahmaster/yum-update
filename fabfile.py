@@ -114,5 +114,5 @@ def get_stats():
             print "%s meminfo:\n %s " % (env.host, meminfo)
             print "%s partition info:\n %s " % (env.host, dfusage)
             print "%s ldd info: %s " % (env.host, lddinfo)
-            print "%s Perl version: %s " % (env.host, perlinfo)
+            print "%s Perl version: %s \n\n" % (env.host, perlinfo)
 

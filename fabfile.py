@@ -70,11 +70,17 @@ def fastReboot():
 def cleanOldKernels():
     """Get rid of all kernels except for the last two"""
     with hide('everything'):
-        """ sudo(package-cleanup -y --oldkernels --count=2)"""
         kernels = run("rpm -q kernel")
         numkern = len(kernels.split('\n'))
         print "Installed Kernels %s" % kernels
         print "Number of kernels %s" % numkern
+        if numkern > 2:
+            print "%s has more then 2 kernels, sweeping extra old kernels under the rug" % env.host
+            """sudo(package-cleanup -y --oldkernels --count=2)"""
+            afterkernels = run("rpm -q kernel")
+            afternumkern = len(afterkernels.split('\n'))
+            print "Now there are %s kernels installed" %s afternumkern
+
 
 
 

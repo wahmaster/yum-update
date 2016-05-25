@@ -85,10 +85,6 @@ def cleanOldKernels():
             afternumkern = len(afterkernels.split('\n'))
             print "<font color=green>%s now has <font color=red> %s </font><font color=green>installed kernels</font>" % (env.host, afternumkern)
 
-
-
-
-
 @task
 @parallel
 @excludehosts

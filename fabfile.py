@@ -34,8 +34,8 @@ def update():
 	if run("yum check-update").return_code != 0:
 		"""Run yum update with exclusions"""
 		env.parallel = True
-		print ("These are the excludes: %s") % (env.excludes)				
-                sudo("yum -y update --disablerepo='*artifactory' %s" % (env.excludes), pty=True) 
+		print ("These are the excludes: %s") % (env.excludes)
+                sudo("yum -y update --disablerepo='*artifactory' %s" % (env.excludes), pty=True)
 
 @task
 @excludehosts
@@ -54,15 +54,14 @@ def slowReboot():
 @parallel
 @excludehosts
 def fastReboot():
-	"""Do a careful reboot with checks."""
-	with hide('everything'):
-		print "<font color=red>Rebooting %s now!</font>" % env.host
-		preresult = run("uname -r")
-		preresult.failed
-		print "<font color=red>Kernel version before reboot:</font><font color=green> %s</font>" % preresult
-		reboot()
-		postresult = run("uname -r")
-		print "<font color=red>Kernel version after reboot: <font color=green> %s</font>" % postresult
+	"""Do a fast reboot with checks."""
+	print "<font color=red>Rebooting %s now!</font>" % env.host
+	preresult = run("uname -r")
+	preresult.failed
+	print "<font color=red>Kernel version before reboot:</font><font color=green> %s</font>" % preresult
+	""" reboot(wait=120) """
+	postresult = run("uname -r")
+	print "<font color=red>Kernel version after reboot: <font color=green> %s</font>" % postresult
 
 @task
 @parallel

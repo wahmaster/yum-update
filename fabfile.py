@@ -79,7 +79,7 @@ def cleanOldKernels():
             """sudo(package-cleanup -y --oldkernels --count=2)"""
             afterkernels = run("rpm -q kernel")
             afternumkern = len(afterkernels.split('\n'))
-            print "Now there are %s kernels installed" %s afternumkern
+            print "Now there are %s kernels installed" % afternumkern
 
 
 

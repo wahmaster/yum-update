@@ -111,5 +111,8 @@ def get_stats():
             print "%s is running kernel: %s" % (env.host, kernelver)
             print "%s has %s CPU cores." % (env.host, cpuinfo)
             print "%s has %s free memory." % (env.host, freemem)
-            print "%s meminfo:\n %s free memory." % (env.host, meminfo)
+            print "%s meminfo:\n %s " % (env.host, meminfo)
+            print "%s partition info:\n %s " % (env.host, dfusage)
+            print "%s ldd info: %s " % (env.host, lddinfo)
+            print "%s Perl version: %s " % (env.host, perlinfo)
 

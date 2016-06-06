@@ -45,7 +45,7 @@ def slowReboot():
 		preresult = run("uname -r")
 		preresult.failed
 		print "<font color=red>Kernel version before reboot:</font><font color=green> %s</font>" % preresult
-		reboot(wait=120)
+		""" reboot(wait=120) """
 		postresult = run("uname -r")
 		print "<font color=red>Kernel version after reboot: <font color=green> %s</font>" % postresult
 

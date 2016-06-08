@@ -95,8 +95,8 @@ def kernelReport():
         redhat = run("cat /etc/redhat-release")
         uptime = run("uptime")
         print "<font color=white>%s: </font><font color=yellow>%s</font>" % (env.host, result)
-        print "<font color=white>%s uptime: </font><font color=yellow>%s</font>" % (env.host, uptime)
-        print "<font color=white>%s: </font><font color=yellow>%s</font></br>" % (env.host, redhat)
+        print "<font color=white>%s: </font><font color=yellow>%s</font>" % (env.host, redhat)
+        print "<font color=white>%s uptime: </font><font color=yellow>%s</font></br>" % (env.host, uptime)
 
 @task
 @parallel

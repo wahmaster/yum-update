@@ -88,19 +88,19 @@ def cleanOldKernels():
 @parallel
 @excludehosts
 def kernelReport():
-	"""Report all running kernel versions"""
-	with hide('everything'):
-		env.parallel = True
-		result = run("uname -r")
-        redhat = run("cat /etc/redhat-release")
-		print "<font color=green>%s is running kernel version: </font><font color=red>%s</font>" % (env.host, result)
-		print "<font color=green>%s contents of /etc/redhat-release: </font><font color=red>%s</font>" % (env.host, redhat)
+    """Report all running kernel versions"""
+    with hide('everything'):
+        env.parallel = True
+        result = run("uname -r")
+        whatredhat = run("cat /etc/redhat-release")
+        print "<font color=green>%s is running kernel version: </font><font color=red>%s</font>" % (env.host, result)
+        print "<font color=green>%s contents of /etc/redhat-release: </font><font color=red>%s</font>" % (env.host, redhat)
 
 @task
 @parallel
 @excludehosts
 def get_stats():
-    """get kernel, #cpus and memory info from server"""
+    """report kernel cpus and memory info from server"""
     with hide('everything'):
         with cd("/tmp"):
             kernelver = run("uname -r")

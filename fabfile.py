@@ -92,7 +92,9 @@ def kernelReport():
 	with hide('everything'):
 		env.parallel = True
 		result = run("uname -r")
+        redhat = run("cat /etc/redhat-release")
 		print "<font color=green>%s is running kernel version: </font><font color=red>%s</font>" % (env.host, result)
+		print "<font color=green>%s contents of /etc/redhat-release: </font><font color=red>%s</font>" % (env.host, redhat)
 
 @task
 @parallel

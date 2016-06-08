@@ -94,7 +94,7 @@ def kernelReport():
         result = run("uname -r")
         redhat = run("cat /etc/redhat-release")
         print "<font color=white>%s: </font><font color=yellow>%s</font>" % (env.host, result)
-        print "<font color=white>%s: </font><font color=yellow>%s</font>" % (env.host, redhat)
+        print "<font color=white>%s: </font><font color=yellow>%s</font></br>" % (env.host, redhat)
 
 @task
 @parallel

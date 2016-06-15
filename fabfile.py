@@ -27,7 +27,7 @@ def excludehosts(func):
     return wraps(func)(closuref)
 
 @task
-@parallel
+@parallel(pool_size=5)
 @excludehosts
 def update():
 	if run("yum check-update").return_code != 0:

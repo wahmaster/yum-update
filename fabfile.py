@@ -27,7 +27,7 @@ def excludehosts(func):
     return wraps(func)(closuref)
 
 @task
-@parallel(pool_size=5)
+@parallel(pool_size=4)
 @excludehosts
 def update():
 	if run("yum check-update").return_code != 0:
@@ -50,7 +50,7 @@ def slowReboot():
 		print "<font color=red>Kernel version after reboot: <font color=green> %s</font>" % postresult
 
 @task
-@parallel
+@parallel(pool_size=5)
 @excludehosts
 def fastReboot():
 	"""Do a fast reboot with checks."""
@@ -64,7 +64,7 @@ def fastReboot():
 	    print "<font color=red>%s kernel version after reboot: <font color=green> %s</font>" % (env.host, preresult)
 
 @task
-@parallel
+@parallel(pool_size=5)
 @excludehosts
 def cleanOldKernels():
     """Get rid of all kernels except for the last two"""
@@ -85,7 +85,7 @@ def cleanOldKernels():
             print "<font color=green>%s now has <font color=red> %s </font><font color=green>installed kernels</font>" % (env.host, afternumkern)
 
 @task
-@parallel
+@parallel(pool_size=5)
 @excludehosts
 def kernelReport():
     """Report all running kernel versions"""
@@ -99,7 +99,7 @@ def kernelReport():
         print "<font color=white>%s uptime: </font><font color=yellow>%s</font></br>" % (env.host, uptime)
 
 @task
-@parallel
+@parallel(pool_size=5)
 @excludehosts
 def get_stats():
     """report kernel cpus and memory info from server"""

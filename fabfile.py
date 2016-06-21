@@ -41,10 +41,11 @@ def update():
 @parallel(pool_size=8)
 @excludehosts
 def checkupdate():
-    if run("yum check-update").return_code != 0:
-		print "<font color=red>%s needs updating.</font>" % env.host
-    else:
-        print "<font color=green>%s does not seem to need any updates</font>" % env.host
+    with hide('everything'):
+        if run("yum check-update").return_code != 0:
+		    print "<font color=red>%s needs updating.</font>" % env.host
+        else:
+            print "<font color=green>%s does not seem to need any updates</font>" % env.host
 
 @task
 @excludehosts

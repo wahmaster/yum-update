@@ -35,7 +35,16 @@ def update():
 		print ("These are the excludes: %s") % (env.excludes)
                 sudo("yum -y update --disablerepo='*artifactory' %s" % (env.excludes), pty=True)
     else:
-        print "<font color=red>%s does not like the check-update command, skipping...</font>" % env.host
+        print "<font color=red>%s does not seem to need any updates, skipping...</font>" % env.host
+
+@task
+@parallel(pool_size=8)
+@excludehosts
+def checkupdate():
+    if run("yum check-update").return_code != 0:
+		print "<font color=red>%s needs updating.</font>" % env.host
+    else:
+        print "<font color=green>%s does not seem to need any updates</font>" % env.host
 
 @task
 @excludehosts

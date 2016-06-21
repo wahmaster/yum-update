@@ -32,14 +32,14 @@ def excludehosts(func):
 def update():
     result = run("yum check-update")
     if result.return_code == 100:
-		"""Run yum update with exclusions"""
-        print "<font color=yellow>%s needs updating.</font>" % env.host
-		print ("These are the excludes: %s") % (env.excludes)
-        sudo("yum -y update --disablerepo='*artifactory' %s" % (env.excludes), pty=True)
+     """Run yum update with exclusions"""
+     print "<font color=yellow>%s needs updating.</font>" % env.host
+     print ("These are the excludes: %s") % (env.excludes)
+     sudo("yum -y update --disablerepo='*artifactory' %s" % (env.excludes), pty=True)
     elif result.return_code == 0:
-        print "<font color=red>%s does not seem to need any updates, skipping...</font>" % env.host
+     print "<font color=red>%s does not seem to need any updates, skipping...</font>" % env.host
     elif result.return_code == 1:
-        print "<font color=red>%s returned an error</font>" % env.host
+     print "<font color=red>%s returned an error</font>" % env.host
 
 @task
 @parallel(pool_size=8)

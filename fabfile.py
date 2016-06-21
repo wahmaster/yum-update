@@ -42,10 +42,13 @@ def update():
 @excludehosts
 def checkupdate():
     with hide('everything'):
-        if run("yum check-update").return_code != 0:
+        result = run("yum check-update")
+        if result.return_code == 100:
 		    print "<font color=red>%s needs updating.</font>" % env.host
-        else:
+        elif result.return_code == 0:
             print "<font color=green>%s does not seem to need any updates</font>" % env.host
+        elif result.return_code == 1:
+            print "<font color=yellow>%s does not seem to need any updates</font>" % env.host
 
 @task
 @excludehosts

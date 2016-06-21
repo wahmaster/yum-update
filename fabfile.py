@@ -46,7 +46,7 @@ def update():
 @excludehosts
 def checkupdate():
     with hide('everything'):
-        result = run("yum check-update")
+        result = run("yum check-update --disablerepo='*artifactory' %s" % (env.excludes), pty=True)
         if result.return_code == 100:
 		    print "<font color=yellow>%s needs updating.</font>" % env.host
         elif result.return_code == 0:

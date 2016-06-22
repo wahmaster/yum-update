@@ -114,8 +114,8 @@ def kernelReport():
         numkern = len(kernels.split('\n'))
         print "<font color=white>%s: </font><font color=yellow>%s</font>" % (env.host, result)
         print "<font color=white>%s: </font><font color=yellow>%s</font>" % (env.host, redhat)
-        print "<font color=white>%s uptime: </font><font color=yellow>%s</font></br>" % (env.host, uptime)
-        print "<font color=white>%s # Installed Kernels: </font><font color=yellow>%s</font></br>" % (env.host, numkern)
+        print "<font color=white>%s uptime: </font><font color=yellow>%s</font>" % (env.host, uptime)
+        print "<font color=white>%s Installed Kernels: </font><font color=yellow>%s</font></br>" % (env.host, numkern)
 
 @task
 @parallel(pool_size=5)

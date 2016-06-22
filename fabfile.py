@@ -63,7 +63,7 @@ def slowReboot():
 		preresult = run("uname -r")
 		preresult.failed
 		print "<font color=red>Kernel version before reboot:</font><font color=green> %s</font>" % preresult
-		reboot(wait=120)
+		reboot(wait=5)
 		postresult = run("uname -r")
 		print "<font color=red>Kernel version after reboot: <font color=green> %s</font>" % postresult
 
@@ -77,9 +77,7 @@ def fastReboot():
 	    preresult = run("uname -r")
 	    preresult.failed
 	    print "<font color=red>%s kernel version before reboot:</font><font color=green> %s</font>" % (env.host, preresult)
-	    reboot()
-	    postresult = run("uname -r")
-	    print "<font color=red>%s kernel version after reboot: <font color=green> %s</font>" % (env.host, preresult)
+	    reboot(wait=5)
 
 @task
 @parallel(pool_size=5)
@@ -112,9 +110,12 @@ def kernelReport():
         result = run("uname -r")
         redhat = run("cat /etc/redhat-release")
         uptime = run("uptime")
+        kernels = run("rpm -q kernel")
+        numkern = len(kernels.split('\n'))
         print "<font color=white>%s: </font><font color=yellow>%s</font>" % (env.host, result)
         print "<font color=white>%s: </font><font color=yellow>%s</font>" % (env.host, redhat)
         print "<font color=white>%s uptime: </font><font color=yellow>%s</font></br>" % (env.host, uptime)
+        print "<font color=white>%s # Installed Kernels: </font><font color=yellow>%s</font></br>" % (env.host, numkern)
 
 @task
 @parallel(pool_size=5)

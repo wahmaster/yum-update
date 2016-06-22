@@ -68,7 +68,7 @@ def slowReboot():
 		print "<font color=red>Kernel version after reboot: <font color=green> %s</font>" % postresult
 
 @task
-@parallel(pool_size=5)
+@parallel(pool_size=15)
 @excludehosts
 def fastReboot():
 	"""Do a fast reboot with checks."""

@@ -84,7 +84,7 @@ def fastReboot():
 @excludehosts
 def cleanOldKernels():
     """Get rid of all kernels except for the last two"""
-    with hide('everything'):
+    with hide('commands'):
         checkinstalled = run("rpm -q yum-utils")
         print "check results: %s" % checkinstalled
         if checkinstalled == 'package yum-utils is not installed':

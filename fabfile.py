@@ -107,7 +107,7 @@ def cleanOldKernels():
 @excludehosts
 def kernelReport():
     """Report all running kernel versions"""
-    with hide('everything'):
+    with hide('commands'):
         env.parallel = True
         result = run("uname -r")
         redhat = run("cat /etc/redhat-release")

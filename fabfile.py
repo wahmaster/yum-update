@@ -86,7 +86,7 @@ def cleanOldKernels():
     """Get rid of all kernels except for the last two"""
     with hide('commands'):
         checkinstalled = run("rpm -q yum-utils")
-        print "check results: %s" % checkinstalled
+        print "<font color=white>check results: %s is installed</font>" % checkinstalled
         if checkinstalled == 'package yum-utils is not installed':
             print "Yum utils as not installed, installing..."
             sudo("yum install -y yum-utils")

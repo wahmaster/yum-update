@@ -92,9 +92,9 @@ def cleanOldKernels():
             sudo("yum install -y yum-utils")
         kernels = run("rpm -q kernel")
         numkern = len(kernels.split('\n'))
-        print "<font color=green>%s: Number of installed kernels: </font><font color=red>%s</font>" % (env.host, numkern)
+        print "<font color=white>%s: Number of installed kernels: </font><font color=red>%s</font>" % (env.host, numkern)
         if numkern > 2:
-            print "<font color=green>%s has more then 2 kernels, sweeping extra old kernels under the rug</font>" % env.host
+            print "<font color=white>%s has more then 2 kernels, sweeping extra old kernels under the rug</font>" % env.host
             sudo("package-cleanup -y --oldkernels --count=2")
             afterkernels = run("rpm -q kernel")
             afternumkern = len(afterkernels.split('\n'))

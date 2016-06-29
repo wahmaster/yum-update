@@ -101,8 +101,8 @@ def cleanOldKernels():
             print "<font color=white>%s now has <font color=red> %s </font><font color=white>installed kernels</font>" % (env.host, afternumkern)
 
 @task
-@parallel(pool_size=5)
 @excludehosts
+@parallel(pool_size=5)
 def kernelReport():
     """Report all running kernel versions"""
     with hide('commands'):

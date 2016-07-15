@@ -30,6 +30,7 @@ def excludehosts(func):
 @parallel(pool_size=4)
 @excludehosts
 def update():
+    """Will update servers in the stage"""
     result = run("yum check-update --disablerepo='*artifactory' %s" % (env.excludes), pty=True)
     if result.return_code == 100:
      """Run yum update with exclusions"""
@@ -45,6 +46,7 @@ def update():
 @parallel(pool_size=8)
 @excludehosts
 def checkupdate():
+    """Checks for available updates for hosts in the stage."""
     with hide('everything'):
         result = run("yum check-update --disablerepo='*artifactory' %s" % (env.excludes), pty=True)
         if result.return_code == 100:
@@ -71,7 +73,7 @@ def slowReboot():
 @parallel(pool_size=10)
 @excludehosts
 def fastReboot():
-	"""Do a fast reboot with checks."""
+	"""Do a fast reboot with no checks."""
 	with hide('commands'):
 	    print "<font color=red>Rebooting %s now!</font>" % env.host
 	    preresult = run("uname -r")

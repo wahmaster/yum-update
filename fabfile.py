@@ -43,36 +43,9 @@ def update():
      print "<font color=red>%s returned an error</font>" % env.host
 
 @task
-@parallel(pool_size=8)
-@excludehosts
-def checkupdate():
-    """Checks for available updates for hosts in the stage."""
-    with hide('everything'):
-        result = run("yum check-update --disablerepo='*artifactory' %s" % (env.excludes), pty=True)
-        if result.return_code == 100:
-		    print "<font color=yellow>%s needs updating.</font>" % env.host
-        elif result.return_code == 0:
-            print "<font color=blue>%s does not seem to need any updates</font>" % env.host
-        elif result.return_code == 1:
-            print "<font color=red>%s returned an error</font>" % env.host
-
-@task
-@excludehosts
-def slowReboot():
-	"""Do a careful reboot with checks."""
-	with hide('everything'):
-		print "<font color=red>Rebooting %s now!</font>" % env.host
-		preresult = run("uname -r")
-		preresult.failed
-		print "<font color=red>Kernel version before reboot:</font><font color=green> %s</font>" % preresult
-		reboot(wait=5)
-		postresult = run("uname -r")
-		print "<font color=red>Kernel version after reboot: <font color=green> %s</font>" % postresult
-
-@task
 @parallel(pool_size=10)
 @excludehosts
-def fastReboot():
+def DoTheReboot():
 	"""Do a fast reboot with no checks."""
 	with hide('commands'):
 	    print "<font color=red>Rebooting %s now!</font>" % env.host
@@ -80,6 +53,8 @@ def fastReboot():
 	    preresult.failed
 	    print "<font color=red>%s kernel version before reboot:</font><font color=green> %s</font>" % (env.host, preresult)
 	    reboot(wait=5)
+		postresult = run("uname -r")
+		print "<font color=red>Kernel version after reboot: <font color=green> %s</font>" % postresult
 
 @task
 @parallel(pool_size=5)
@@ -101,35 +76,4 @@ def cleanOldKernels():
             afterkernels = run("rpm -q kernel")
             afternumkern = len(afterkernels.split('\n'))
             print "<font color=white>%s now has <font color=red> %s </font><font color=white>installed kernels</font>" % (env.host, afternumkern)
-
-@task
-@excludehosts
-@parallel(pool_size=5)
-def kernelReport():
-    """Report all running kernel versions"""
-    with hide('commands'):
-        env.parallel = True
-        result = run("uname -r")
-        redhat = run("cat /etc/redhat-release")
-        uptime = run("uptime")
-        kernels = run("rpm -q kernel")
-        numkern = len(kernels.split('\n'))
-        print "<font color=white>%s: </font><font color=yellow>%s</font>" % (env.host, result)
-        print "<font color=white>%s: </font><font color=yellow>%s</font>" % (env.host, redhat)
-        print "<font color=white>%s uptime: </font><font color=yellow>%s</font>" % (env.host, uptime)
-        print "<font color=white>%s Installed Kernels: </font><font color=yellow>%s</font></br>" % (env.host, numkern)
-
-@task
-@parallel(pool_size=5)
-@excludehosts
-def get_stats():
-    """report kernel cpus and memory info from server"""
-    with hide('everything'):
-        with cd("/tmp"):
-            kernelver = run("uname -r")
-            cpuinfo = run("cat /proc/cpuinfo |grep processor|wc -l")
-            meminfo = run("egrep 'MemTotal|MemFree|MemAvailable|SwapCached|SwapTotal|SwapFree' /proc/meminfo")
-            print "%s is running kernel: %s" % (env.host, kernelver)
-            print "%s has %s CPU cores." % (env.host, cpuinfo)
-            print "%s meminfo:\n %s \n\n" % (env.host, meminfo)
 

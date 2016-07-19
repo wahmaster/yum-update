@@ -53,8 +53,8 @@ def DoTheReboot():
 	    preresult.failed
 	    print "<font color=red>%s kernel version before reboot:</font><font color=green> %s</font>" % (env.host, preresult)
 	    reboot(wait=5)
-		postresult = run("uname -r")
-		print "<font color=red>Kernel version after reboot: <font color=green> %s</font>" % postresult
+        postresult = run("uname -r")
+        print "<font color=red>Kernel version after reboot: <font color=green> %s</font>" % postresult
 
 @task
 @parallel(pool_size=5)

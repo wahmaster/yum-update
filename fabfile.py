@@ -43,7 +43,6 @@ def update():
      print "<font color=red>%s returned an error</font>" % env.host
 
 @task
-@parallel(pool_size=10)
 @excludehosts
 def DoTheReboot():
 	"""Do a fast reboot with no checks."""
@@ -53,8 +52,12 @@ def DoTheReboot():
 	    preresult.failed
 	    print "<font color=red>%s kernel version before reboot:</font><font color=green> %s</font>" % (env.host, preresult)
 	    reboot(wait=5)
+
+        while True:
+            time.sleep(20)
+            run('date')
         postresult = run("uname -r")
-        print "<font color=red>Kernel version after reboot: <font color=green> %s</font>" % postresult
+        print "<font color=red>%s Kernel version after reboot: <font color=green> %s</font>" % (env.host, postresult)
 
 @task
 @parallel(pool_size=5)

@@ -52,11 +52,7 @@ def DoTheReboot():
 	    preresult = run("uname -r")
 	    preresult.failed
 	    print "<font color=red>%s kernel version before reboot:</font><font color=green> %s</font>" % (env.host, preresult)
-	    reboot(wait=5)
-
-        while True:
-            sleep(5)
-            run('date')
+	    reboot(wait=25)
         postresult = run("uname -r")
         print "<font color=red>%s Kernel version after reboot: <font color=green> %s</font>" % (env.host, postresult)
 

@@ -44,6 +44,7 @@ def update():
      print "<font color=red>%s returned an error</font>" % env.host
 
 @task
+@parallel(pool_size=4)
 @excludehosts
 def DoTheReboot():
 	"""Do a fast reboot with no checks."""

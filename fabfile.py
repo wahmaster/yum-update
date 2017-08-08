@@ -28,7 +28,7 @@ def excludehosts(func):
     return wraps(func)(closuref)
 
 @task
-@parallel(pool_size=4)
+@parallel(pool_size=8)
 @excludehosts
 def update():
     """Will update servers in the stage"""

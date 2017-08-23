@@ -58,6 +58,16 @@ def DoTheReboot():
         print "<font color=red>%s Kernel version after reboot: <font color=green> %s</font>" % (env.host, postresult)
 
 @task
+@parallel(pool_size=4)
+@excludehosts
+def getUptime():
+	with hide('commands'):
+	    print "<font color=red>Checking %s now!</font>" % env.host
+	    preresult = run("uptime")
+	    preresult.failed
+	    print "<font color=red>%s Uptime:</font><font color=green> %s</font>" % (env.host, preresult)
+
+@task
 @parallel(pool_size=5)
 @excludehosts
 def cleanOldKernels():

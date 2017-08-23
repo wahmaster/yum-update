@@ -63,9 +63,11 @@ def DoTheReboot():
 def getUptime():
 	with hide('commands'):
 	    print "<font color=red>Checking %s now!</font>" % env.host
-	    preresult = run("uptime")
+	    uptime = run("uptime")
+	    uname = run("uname -r")
 	    preresult.failed
-	    print "<font color=red>%s Uptime:</font><font color=green> %s</font>" % (env.host, preresult)
+	    print "<font color=red>%s Uptime:</font><font color=green> %s</font>" % (env.host, uptime)
+	    print "<font color=red>%s Kernel:</font><font color=green> %s</font>" % (env.host, uname)
 
 @task
 @parallel(pool_size=5)
